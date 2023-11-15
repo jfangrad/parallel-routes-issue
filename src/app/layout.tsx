@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+// import { headers } from "next/headers";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -10,13 +11,26 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({
-  children,
+  route1,
+  route2,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode,
+  route1: React.ReactNode,
+  route2: React.ReactNode,
 }) {
+
+  // const origin = headers().get("host")
+  const isRoute1 = true;
+
+  let view: React.ReactNode;
+  if (isRoute1) {
+    view = route1;
+  } else {
+    view = route2;
+  }
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>{view}</body>
     </html>
   )
 }
